@@ -7,4 +7,6 @@ steps:
   args: ['run', 'build']
 - name: 'gcr.io/cloud-builders/gcloud'
   args: ['app', 'deploy', '--project', '${PROJECT_ID}']
+options:
+  logging: CLOUD_LOGGING_ONLY # <--- ADD THIS BLOCK
 timeout: '1600s' # Adjust timeout if needed
