@@ -16,8 +16,8 @@ handlers:
   # This pattern matches common static file extensions.
   # The 'build/\1' refers to files within the 'build' directory.
   - url: /(.*\.(css|js|json|png|jpg|jpeg|gif|svg|ico|eot|ttf|woff|woff2))$
-    static_files: build/\1
-    upload: build/.*\.(css|js|json|png|jpg|jpeg|gif|svg|ico|eot|ttf|woff|woff2)$
+    static_files: dist/\1
+    upload: dist/.*\.(css|js|json|png|jpg|jpeg|gif|svg|ico|eot|ttf|woff|woff2)$
     # Optional: Add caching headers for static assets for better performance
     http_headers:
       Cache-Control: public, max-age=31536000, immutable
@@ -28,8 +28,8 @@ handlers:
   # serve the 'index.html' file. This is crucial for Single Page Applications (SPAs)
   # where client-side routing handles different URLs.
   - url: /.*
-    static_files: build/index.html
-    upload: build/index.html
+    static_files: dist/index.html
+    upload: dist/index.html
     # Optional: Add caching headers for index.html (usually shorter, or no-cache for dynamic content)
     http_headers:
       Cache-Control: no-cache, no-store, must-revalidate
