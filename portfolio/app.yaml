@@ -1,0 +1,58 @@
+# app.yaml
+# This file should be placed in your 'portfolio' directory
+
+# Specify the runtime environment.
+# App Engine Standard environment for Node.js.
+# It's crucial that this version is supported by App Engine.
+# As discussed, nodejs18 is a safe bet.
+runtime: nodejs18
+
+# Specify the environment type. 'standard' is generally recommended for Node.js apps.
+env: standard
+
+# Handlers define how requests are routed and served.
+handlers:
+  # 1. Serve all static assets (CSS, JS, images, etc.) directly.
+  # This pattern matches common static file extensions.
+  # The 'build/\1' refers to files within the 'build' directory.
+  - url: /(.*\.(css|js|json|png|jpg|jpeg|gif|svg|ico|eot|ttf|woff|woff2))$
+    static_files: build/\1
+    upload: build/.*\.(css|js|json|png|jpg|jpeg|gif|svg|ico|eot|ttf|woff|woff2)$
+    # Optional: Add caching headers for static assets for better performance
+    http_headers:
+      Cache-Control: public, max-age=31536000, immutable
+    # Optional: Set expiration for cached assets (e.g., 1 year)
+    expiration: "365d"
+
+  # 2. For all other requests (which don't match a static file),
+  # serve the 'index.html' file. This is crucial for Single Page Applications (SPAs)
+  # where client-side routing handles different URLs.
+  - url: /.*
+    static_files: build/index.html
+    upload: build/index.html
+    # Optional: Add caching headers for index.html (usually shorter, or no-cache for dynamic content)
+    http_headers:
+      Cache-Control: no-cache, no-store, must-revalidate
+    # Optional: Set expiration for index.html (e.g., 0 for immediate revalidation)
+    expiration: "0s"
+
+# Optional: Configure automatic scaling for your service.
+# This tells App Engine to scale down to 0 instances when there's no traffic, saving costs.
+# It will scale up as traffic increases.
+automatic_scaling:
+  min_instances: 0
+  max_instances: 10 # Adjust this based on your expected traffic
+  target_cpu_utilization: 0.6 # Target 60% CPU utilization before scaling up
+  target_throughput_utilization: 0.6 # Target 60% throughput utilization before scaling up
+
+# Optional: Set an instance class. F1 is the smallest and cheapest.
+# For a static file server, F1 is usually sufficient.
+instance_class: F1
+
+# Optional: Environment variables for your application.
+# You might not need these for a purely static frontend,
+# but they are useful for backend services or if your React app
+# needs to know its environment (e.g., API endpoint).
+env_variables:
+  NODE_ENV: production
+  # REACT_APP_API_URL: "https://your-backend-service-url.appspot.com" # Example for future backend
