@@ -5,7 +5,7 @@
 # App Engine Standard environment for Node.js.
 # It's crucial that this version is supported by App Engine.
 # As discussed, nodejs18 is a safe bet.
-runtime: nodejs18
+runtime: nodejs20
 
 # Specify the environment type. 'standard' is generally recommended for Node.js apps.
 env: standard
