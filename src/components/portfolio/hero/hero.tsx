@@ -3,6 +3,7 @@ import { useGSAP } from "@gsap/react"
 import SplitText from "gsap/SplitText"
 import ScrambleTextPlugin from "gsap/ScrambleTextPlugin"
 import * as React from "react"
+import { twMerge } from "tailwind-merge"
 
 interface HeroProps {
     className?: string
@@ -25,7 +26,7 @@ export const Hero: React.FC<HeroProps> = ({ className }) => {
 
     });
     return (
-        <div className="split text-white text-8xl  ">
+        <div className={twMerge([className,"split text-white text-8xl"])}>
             <h1 className="font-monotalic">HELLO WorLd</h1>
             <h2 id="hero-text"></h2>
         </div>

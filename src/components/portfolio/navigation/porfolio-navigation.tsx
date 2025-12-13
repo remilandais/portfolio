@@ -1,5 +1,4 @@
 import * as React from "react"
-import { cn } from "@/lib/utils"
 import { CircleCheckIcon, CircleHelpIcon, CircleIcon } from "lucide-react"
 import {
   NavigationMenu,
@@ -55,8 +54,6 @@ interface PortfolioNavigationProps extends React.HTMLAttributes<HTMLElement> {
 }
 
 export function PortfolioNavigation({
-  className,
-  ...props
 }: PortfolioNavigationProps) {
   return (
     <div className="w-full flex justify-center">
